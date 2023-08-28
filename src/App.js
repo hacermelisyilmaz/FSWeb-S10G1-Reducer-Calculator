@@ -3,10 +3,10 @@ import React, { useReducer } from "react";
 import TotalDisplay from "./components/TotalDisplay";
 import CalcButton from "./components/CalcButton";
 import reducer, { initialState } from "./reducers";
+import { addOne, ADD_ONE } from "./actions";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-
   return (
     <div className="App">
       <nav className="navbar navbar-dark bg-dark">
@@ -22,7 +22,7 @@ function App() {
                 <b>Operation: </b> {state.operation}
               </span>
               <span id="memory">
-                <b>Memory:</b> {state.memory}
+                <b>Memory: </b> {state.memory}
               </span>
             </div>
 
@@ -33,7 +33,12 @@ function App() {
             </div>
 
             <div className="row">
-              <CalcButton value={1} />
+              <CalcButton
+                value={1}
+                onClick={() => {
+                  dispatch(addOne());
+                }}
+              />
               <CalcButton value={2} />
               <CalcButton value={3} />
             </div>
