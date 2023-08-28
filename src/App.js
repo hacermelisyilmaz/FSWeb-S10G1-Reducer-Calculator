@@ -3,7 +3,7 @@ import React, { useReducer } from "react";
 import TotalDisplay from "./components/TotalDisplay";
 import CalcButton from "./components/CalcButton";
 import reducer, { initialState } from "./reducers";
-import { APPLY_NUMBER, CHANGE_OPERATION, applyNumber } from "./actions";
+import { APPLY_NUMBER, CHANGE_OPERATION } from "./actions";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
