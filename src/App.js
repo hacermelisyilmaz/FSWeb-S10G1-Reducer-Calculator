@@ -3,7 +3,7 @@ import React, { useReducer } from "react";
 import TotalDisplay from "./components/TotalDisplay";
 import CalcButton from "./components/CalcButton";
 import reducer, { initialState } from "./reducers";
-import { APPLY_NUMBER, CHANGE_OPERATION } from "./actions";
+import { APPLY_NUMBER, CHANGE_OPERATION, CLEAR_DISPLAY } from "./actions";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -15,6 +15,10 @@ function App() {
     let type = parseInt(v) ? APPLY_NUMBER : CHANGE_OPERATION;
 
     dispatch({ type: type, payload: value });
+  };
+
+  const resetClickHandler = (e) => {
+    dispatch({ type: CLEAR_DISPLAY, payload: initialState });
   };
 
   return (
@@ -67,7 +71,7 @@ function App() {
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"} />
+              <CalcButton value={"CE"} onClick={resetClickHandler} />
             </div>
           </form>
         </div>
