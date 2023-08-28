@@ -3,13 +3,18 @@ import React, { useReducer } from "react";
 import TotalDisplay from "./components/TotalDisplay";
 import CalcButton from "./components/CalcButton";
 import reducer, { initialState } from "./reducers";
-import { applyNumber } from "./actions";
+import { APPLY_NUMBER, CHANGE_OPERATION, applyNumber } from "./actions";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const clickHandler = (event) => {
-    dispatch(applyNumber(parseInt(event.target.value)));
+    let v = event.target.value;
+
+    let value = parseInt(v) ? parseInt(v) : v;
+    let type = parseInt(v) ? APPLY_NUMBER : CHANGE_OPERATION;
+
+    dispatch({ type: type, payload: value });
   };
 
   return (
@@ -56,9 +61,9 @@ function App() {
             </div>
 
             <div className="row">
-              <CalcButton value={"+"} />
-              <CalcButton value={"*"} />
-              <CalcButton value={"-"} />
+              <CalcButton value={"+"} onClick={clickHandler} />
+              <CalcButton value={"*"} onClick={clickHandler} />
+              <CalcButton value={"-"} onClick={clickHandler} />
             </div>
 
             <div className="row ce_button">
